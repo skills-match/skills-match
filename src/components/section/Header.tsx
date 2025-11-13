@@ -31,17 +31,17 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="shadow-md border-b border-border">
+    <header className="shadow-md border-b bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-full p-4 bg-gradient-primary rounded-lg flex items-center justify-center">
+            <div className="w-full bg-gradient-primary rounded-lg flex items-center justify-center">
               <img
                 onClick={() => navigate("/home")}
-                className="h-14 cursor-pointer"
-                src="/logo-hc-conecta.png"
-                alt="Logo HC Conecta"
+                className="max-h-14 w-auto cursor-pointer"
+                src="/logo.png"
+                alt="Logo Skills Match"
               />
             </div>
           </div>
@@ -60,8 +60,8 @@ const Header: React.FC = () => {
                     }}
                     className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                       location.pathname === item.path
-                        ? "bg-blue-700 text-white"
-                        : "text-foreground hover:bg-accent hover:text-accent-foreground"
+                        ? "text-foreground hover:text-primary font-semibold"
+                        : "text-foreground hover:text-primary font-semibold"
                     }`}
                   >
                     {item.name}
@@ -167,7 +167,7 @@ const Header: React.FC = () => {
                     }}
                     className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                       location.pathname === item.path
-                        ? "bg-blue-700 text-white"
+                        ? "text-foreground hover:text-primary font-semibold"
                         : "text-foreground hover:bg-accent hover:text-accent-foreground"
                     }`}
                   >
@@ -179,28 +179,28 @@ const Header: React.FC = () => {
                 <>
                   <div className="flex items-center px-2 py-3 gap-2">
                     <i>
-                      <LogIn size={20} className="text-blue-700" />
+                      <LogIn size={20} className="text-primary" />
                     </i>
                     <button
                       onClick={() => {
                         setIsMobileMenuOpen(false);
                         navigate("/login");
                       }}
-                      className="block rounded-lg font-medium transition-colors text-blue-700"
+                      className="block rounded-lg font-medium transition-colors text-primary"
                     >
                       Entrar
                     </button>
                   </div>
                   <div className="flex items-center px-2 py-3 gap-2">
                     <i>
-                      <UserRoundPlusIcon size={20} className="text-blue-700" />
+                      <UserRoundPlusIcon size={20} className="text-primary" />
                     </i>
                     <button
                       onClick={() => {
                         setIsMobileMenuOpen(false);
                         navigate("/registrar");
                       }}
-                      className="block rounded-lg font-medium transition-colors text-blue-700"
+                      className="block rounded-lg font-medium transition-colors text-primary"
                     >
                       Criar Conta
                     </button>

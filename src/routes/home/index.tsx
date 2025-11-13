@@ -1,104 +1,68 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import Location from "@/components/section/Location";
 import Button from "@/components/ui/button/Button";
-import H2 from "@/components/ui/textos/H2";
-import SectionCardHome from "@/components/section/Section-card-home";
-import TextToSpeechButton from "@/components/tts/TextToSpeechButton";
+import Title from "@/components/ui/textos/Title";
+import { ArrowBigRight, ArrowRightIcon, BrainCircuit } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import highlights from "@/data/highlights";
+import { steps } from "@/data/steps";
+import Subtitle from "@/components/ui/textos/Subtitle";
+import { Text } from "@/components/ui/textos/Text";
+import Features from "@/components/section/Features";
+import Plans from "@/components/section/Plans";
 
-const Home: React.FC = () => {
-  const { pathname } = useLocation();
-
+export const Home = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
 
   return (
-    <div className="bg-white/70">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-500 to-blue-700 h-600 text-white py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div id="welcome">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-emerald-400"> HC Conecta </span> - Guia para
-              o
-              <br />
-              Hospital das Clínicas
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100">
-              Ajudamos você a acessar os serviços de saúde de forma fácil e
-              clara.
-              <br />
-              Criado especialmente para pessoas que têm dificuldades com a
-              internet.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={() => navigate("/guia")}
-              id="btn-passos"
-              size="lg"
-              className="bg-blue-700 hover:bg-blue-800 text-primary w-full sm:w-auto"
-            >
-              Como Acessar o Site
-            </Button>
-            <Button
-              onClick={() => navigate("/consulta")}
-              variant="outline"
-              size="lg"
-              className="border-white text-white w-full sm:w-auto"
-            >
-              Agendar Consulta
-            </Button>
+    <div className="w-full min-h-full bg-background text-gray-900 font-sans">
+      {/* Hero */}
+      <section className="flex flex-col items-center justify-center text-center py-24 px-6 gap-8 ">
+      <span className="flex gap-2 bg-accent/20 p-2 px-5 items-center justify-center text-accent font-semibold rounded-full border "> <BrainCircuit size={20} className="text-accent" /> Orientação com AI</span>
+
+        <div className="max-w-xl md:max-w-3xl flex flex-col items-center justify-center gap-3 md:gap-6 flex-wrap">
+          <Title>Descubra o caminho certo para sua carreira</Title>
+          <Text colors="mutedForeground" className="text-lg md:text-2xl mb-8">
+          O Skills Match usa IA para te conectar com a profissão ideal com base nas suas habilidades. Teste agora e descubra seu potencial.
+          </Text>
+          <div className="flex gap-2 iterms-center justify-center flex-wrap">
+             <Button size="lg" className="flex gap-2 items-center justify-center" onClick={() => navigate("/cadastro")}>Comece agora <i> <ArrowRightIcon size={20} /> </i></Button>
+             <Button size="md" variant="outline" onClick={() => navigate("/")}>Saiba Mais</Button>
           </div>
         </div>
       </section>
 
-      <SectionCardHome />
-
-      {/* CTA Section */}
-      <section className="py-16 flex flex-col gap-20 items-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center gap-2">
-          <div>
-            <H2>Precisa de Ajuda Personalizada?</H2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Nossa equipe de suporte está pronta para ajudar você por telefone
-              ou email
-            </p>
-            <Button
-              onClick={() => navigate("/suporte")}
-              className="text-white"
-              size="lg"
+      <section className="py-20 px-6 max-w-6xl mx-auto">
+        <Subtitle>Como funciona</Subtitle>
+        <div className="grid md:grid-cols-3 gap-8 mt-12 flex-wrap">
+          {steps.map((step) => (
+            <div
+              key={step.step}
+              className="bg-white shadow-md rounded-2xl p-8 flex flex-col items-start hover:shadow-lg transition"
             >
-              Falar com Suporte
-            </Button>
-          </div>
-          <div className="mt-5">
-            <TextToSpeechButton
-              colorIsBlue
-              text="Precisa de Ajuda Personalizada? Nossa equipe de suporte está pronta para ajudar você por telefone ou email "
-            />
-          </div>
-        </div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center gap-2">
-          <H2>
-            Onde encontrar o Hospital das Clínicas
-          </H2>
-          <p className="text-xl text-muted-foreground mb-5 max-w-4xl">
-            O Hospital das Clínicas está localizado em uma região de fácil
-            acesso. Veja abaixo o endereço completo e as opções de transporte.
-          </p>
-          <div>
-            <TextToSpeechButton
-              colorIsBlue
-              text="Onde encontrar o Hospital das Clínicas? O Hospital das Clínicas está localizado em uma região de fácil acesso. Veja abaixo o endereço completo e as opções de transporte."
-            />
-          </div>
+              <span className="text-5xl font-bold text-primary mb-4">
+                {step.step}
+              </span>
+              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+              <Text colors="mutedForeground" size="md">{step.text}</Text>
+            </div>
+          ))}
         </div>
       </section>
-      <Location />
+
+      {/* Features */}
+      <Features />
+      <Plans />
+
+      {/* CTA final */}
+      <section className="py-20 px-6 text-center">
+        <Subtitle>
+        Encontre o que te move
+        </Subtitle>
+        <Text colors="mutedForeground" size="lg" className="mb-8 max-w-2xl mx-auto">
+        Teste agora com Skills Match e descubra a carreira perfeita para você.
+        </Text>
+        <Button onClick={() => navigate("/")}>Testar agora</Button>
+      </section>
     </div>
   );
 };

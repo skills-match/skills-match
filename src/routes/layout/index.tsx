@@ -1,45 +1,41 @@
-import Footer from "@/components/section/Footer";
-import Header from "@/components/section/Header";
-import { ZoomIn, ZoomOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { ChevronUp } from "lucide-react";
+import Header from "@/components/section/Header";
+import Footer from "@/components/section/Footer";
 
 export default function Layout() {
-
-  const [fontSize, setFontSize] = useState<number>(16);
-
-  const increaseFont = () => {
-    setFontSize(prev => Math.min(prev + 2, 22));
-  };
-
-  const decreaseFont = () => {
-    setFontSize(prev => Math.max(prev - 2, 14));
-  };
+  const [showScroll, setShowScroll] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("fontSize", document.documentElement.style.fontSize = `${fontSize}px`)
-  }, [fontSize])
+    const handleScroll = () => setShowScroll(window.scrollY > 200);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div >
-      <header>
-        <Header />
-      </header>
-      <main>
+    <div className="flex flex-col min-h-screen bg-background text-foreground relative overflow-x-hidden">
+      {/* Header */}
+      <Header />
+
+      {/* Conteúdo principal */}
+      <main className="flex-grow">
         <Outlet />
-        <div id="letter" className="fixed right-0 m-10 lg:mx-[15%] lg:my-14 bottom-0 py-3 px-6 bg-gradient-to-br from-blue-500 to-blue-700 flex gap-4 rounded-full shadow-md ">
-          <button onClick={increaseFont} className="flex relative font-semibold">
-          <ZoomIn size={28} className="text-white/80"/>
-          </button>
-          <button onClick={decreaseFont} className="flex relative font-semibold">
-            <ZoomOut size={28} className="text-white/80" />
-          </button>
-        </div>
       </main>
 
-      <footer>
-        <Footer />
-      </footer>
+      {/* Botão de voltar ao topo */}
+      {showScroll && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-8 right-8 lg:right-16 p-3 rounded-full bg-primary text-white shadow-lg hover:bg-secondary transition-all duration-300 animate-bounce z-50"
+          aria-label="Voltar ao topo"
+        >
+          <ChevronUp className="h-6 w-6" />
+        </button>
+      )}
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
