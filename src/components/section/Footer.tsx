@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-background border-t border-border scroll-smooth text-foreground">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col justify-center">
+      <div className="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8 py-12 flex flex-col justify-center">
         <div className="flex flex-col md:flex-row md:justify-around gap-8">
           {/* Brand */}
           <div className="flex flex-col items-start">
@@ -41,9 +41,9 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center ">
-          <p className="">
-            © 2025 HC Conecta - Guia de Acesso. Todos os direitos reservados.
-          </p>
+          <Text size="sm" colors="mutedForeground">
+            © 2025 Skills Match - Todos os direitos reservados.
+          </Text>
         </div>
       </div>
     </footer>
