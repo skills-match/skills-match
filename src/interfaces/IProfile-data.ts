@@ -1,7 +1,7 @@
 interface IProfileData {
     id?: string,
     name: string,
-    cpf: string,
+    email: string,
     age: number | string,
     password: string,
 }

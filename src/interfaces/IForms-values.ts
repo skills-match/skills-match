@@ -1,5 +1,5 @@
 interface IformValues {
-    cpf: string;
+    email: string;
     age: number;
     password: string;
 }
