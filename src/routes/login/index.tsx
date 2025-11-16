@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/button/Button";
-import { FileUser, Lock, CheckCircle2 } from "lucide-react";
+import { FileUser, Lock, CheckCircle2, Sparkles } from "lucide-react";
 import InputLogin from "@/components/ui/input/Input-login";
 import { useForm } from "react-hook-form";
 import { cpfMask } from "@/utils/mask/cpf-mask";
@@ -10,6 +10,7 @@ import ILoginContext from "@/interfaces/ILogin-context";
 import IProfileData from "@/interfaces/IProfile-data";
 import { H3 } from "@/components/ui/textos/H3";
 import { Text } from "@/components/ui/textos/Text";
+import Title from "@/components/ui/textos/Title";
 
 const Login = () => {
   const location = useLocation();
@@ -62,25 +63,26 @@ const Login = () => {
 
   return (
     <div className="min-h-screen w-full px-6 md:px-12 flex items-center justify-center bg-gradient-to-br from-primary/5 via-transparent to-primary/5">
-
+ 
       {/* GRID PRINCIPAL */}
-      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
         {/* LADO ESQUERDO */}
-        <div>
-          <p className="text-sm font-medium text-primary mb-3">
+        <div className="hidden md:block">
+          <Text size="md" colors="primary" className="font-medium mb-3">
+            <Sparkles size={16} className="inline mr-2 mb-1" />
             BEM-VINDO DE VOLTA
-          </p>
+          </Text>
 
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight text-foreground">
+          <Title>
             Descubra sua <br />
             <span className="text-primary">carreira ideal</span>
-          </h1>
+          </Title>
 
-          <p className="text-muted-foreground mt-4 max-w-md">
+          <Text size="md" colors="mutedForeground" className="mt-4 max-w-md">
             Acesse sua conta para continuar explorando oportunidades
             personalizadas e receber recomendações baseadas em IA.
-          </p>
+          </Text>
 
           {/* LISTA DE BENEFÍCIOS */}
           <div className="mt-8 space-y-3">
@@ -101,8 +103,8 @@ const Login = () => {
         <div className="bg-white dark:bg-surface p-10 rounded-2xl shadow-xl border border-border w-full max-w-md mx-auto">
 
           <div className="mb-8">
-            <H3 isStronger={true}>Entrar</H3>
-            <Text>Use suas credenciais para acessar a plataforma</Text>
+            <Text size="lg" colors="primary">Entrar</Text>
+            <Text size="md" colors="mutedForeground">Use suas credenciais para acessar a plataforma</Text>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
