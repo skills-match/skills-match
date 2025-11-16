@@ -7,192 +7,188 @@ import { cpfMask } from "@/utils/mask/cpf-mask";
 import { verifyUser } from "@/services/api";
 import ILoginContext from "@/interfaces/ILogin-context";
 import IProfileData from "@/interfaces/IProfile-data";
-import { H3 } from "@/components/ui/textos/H3";
 import { Text } from "@/components/ui/textos/Text";
 import Title from "@/components/ui/textos/Title";
 import Input from "@/components/ui/input/Input-login";
 
 const Login = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-  const [loginExist, setLoginExist] = useState<boolean>(true);
+    const [loginExist, setLoginExist] = useState<boolean>(true);
 
-  const [isLoggedIn, setIsLoggedIn] = useState<ILoginContext>(() => {
-    const stored = localStorage.getItem("loggedIn");
-    return { loggedIn: stored === "true" ? "true" : "false" };
-  });
+    const [isLoggedIn, setIsLoggedIn] = useState<ILoginContext>(() => {
+        const stored = localStorage.getItem("loggedIn");
+        return { loggedIn: stored === "true" ? "true" : "false" };
+    });
 
-  const handleLogin = () => {
-    setIsLoggedIn({ loggedIn: "true" });
-    localStorage.setItem("loggedIn", "true");
-  };
+    const handleLogin = () => {
+        setIsLoggedIn({ loggedIn: "true" });
+        localStorage.setItem("loggedIn", "true");
+    };
 
-  const handleLogout = () => {
-    setIsLoggedIn({ loggedIn: "false" });
-    localStorage.setItem("loggedIn", "false");
-  };
+    const handleLogout = () => {
+        setIsLoggedIn({ loggedIn: "false" });
+        localStorage.setItem("loggedIn", "false");
+    };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IProfileData>();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<IProfileData>();
 
-  const onSubmit = async (data: IProfileData) => {
-    if (data) {
-      const verify = await verifyUser(data);
+    const onSubmit = async (data: IProfileData) => {
+        if (data) {
+            const verify = await verifyUser(data);
 
-      if (verify !== false) {
-        handleLogin();
-        navigate("/home");
-      } else {
-        setLoginExist(false);
-      }
-    } else {
-      handleLogout();
-    }
-  };
+            if (verify !== false) {
+                handleLogin();
+                navigate("/home");
+            } else {
+                setLoginExist(false);
+            }
+        } else {
+            handleLogout();
+        }
+    };
 
-  useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
-    );
-  }, [location.pathname]);
+    useEffect(() => {
+        console.error(
+            "404 Error: User attempted to access non-existent route:",
+            location.pathname
+        );
+    }, [location.pathname]);
 
-  return (
-    <div className="min-h-screen w-full px-6 md:px-12 flex items-center justify-center bg-gradient-to-br from-primary/5 via-transparent to-primary/5">
- 
-      {/* GRID PRINCIPAL */}
-      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+    return (
+        <div className="min-h-screen w-full px-4 py-6 md:px-12 flex items-center justify-center bg-gradient-to-br from-primary/5 via-transparent to-primary/5">
 
-        {/* LADO ESQUERDO */}
-        <div className="hidden md:block">
-          <Text size="md" colors="primary" className="font-medium mb-3">
-            <Sparkles size={16} className="inline mr-2 mb-1" />
-            BEM-VINDO DE VOLTA
-          </Text>
+            {/* GRID PRINCIPAL */}
+            <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
 
-          <Title>
-            Descubra sua <br />
-            <span className="text-primary">carreira ideal</span>
-          </Title>
+                {/* MOBILE HEADER */}
+                <div className="block md:hidden text-center mb-2">
+                    <Text size="md" colors="primary" className="font-medium mb-2">
+                        <Sparkles size={16} className="inline mr-1 mb-1" />
+                        BEM-VINDO DE VOLTA
+                    </Text>
 
-          <Text size="md" colors="mutedForeground" className="mt-4 max-w-md">
-            Acesse sua conta para continuar explorando oportunidades
-            personalizadas e receber recomendações baseadas em IA.
-          </Text>
+                    <Title>
+                        Descubra sua <br />
+                        <span className="text-primary">carreira ideal</span>
+                    </Title>
+                </div>
 
-          {/* LISTA DE BENEFÍCIOS */}
-          <div className="mt-8 space-y-3">
-            {[
-              "Análise de perfil profissional",
-              "Recomendações de cursos personalizadas",
-              "Conversa com IA especialista",
-            ].map((item, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <CheckCircle2 className="text-primary" size={22} />
-                <span className="text-foreground">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+                {/* DESKTOP LADO ESQUERDO */}
+                <div className="hidden md:block">
+                    <Text size="md" colors="primary" className="font-medium mb-3">
+                        <Sparkles size={16} className="inline mr-2 mb-1" />
+                        BEM-VINDO DE VOLTA
+                    </Text>
 
-        {/* CARD DE LOGIN */}
-        <div className="bg-white dark:bg-surface p-10 rounded-2xl shadow-xl border border-border w-full max-w-md mx-auto">
+                    <Title>
+                        Descubra sua <br />
+                        <span className="text-primary">carreira ideal</span>
+                    </Title>
 
-          <div className="mb-8">
-            <Text size="lg" colors="primary">Entrar</Text>
-            <Text size="md" colors="mutedForeground">Use suas credenciais para acessar a plataforma</Text>
-          </div>
+                    <Text size="md" colors="mutedForeground" className="mt-4 max-w-md">
+                        Acesse sua conta para continuar explorando oportunidades personalizadas e
+                        receber recomendações baseadas em IA.
+                    </Text>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    <div className="mt-8 space-y-3">
+                        {[
+                            "Análise de perfil profissional",
+                            "Recomendações de cursos personalizadas",
+                            "Conversa com IA especialista",
+                        ].map((item, index) => (
+                            <div key={index} className="flex items-center gap-3">
+                                <CheckCircle2 className="text-primary" size={22} />
+                                <span className="text-foreground">{item}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
-            {/* CPF */}
-            <fieldset className="flex flex-col gap-2 relative">
-              <label className="text-sm font-medium text-foreground">
-                CPF *
-              </label>
+                {/* CARD DE LOGIN */}
+                <div className="bg-white dark:bg-surface p-6 md:p-10 rounded-2xl shadow-xl border border-border w-full max-w-md mx-auto">
 
-              <FileUser size={20} className="absolute left-3 top-12 text-gray-500" />
+                    <div className="mb-6 md:mb-8 text-start md:text-left">
+                        <Text size="lg" colors="primary" className="font-medium">Entrar</Text>
+                        <Text size="md" colors="mutedForeground">
+                            Use suas credenciais para acessar a plataforma
+                        </Text>
+                    </div>
 
-              <input
-                {...register("cpf", { required: true, maxLength: 14 })}
-                onChange={(e) => {
-                  e.target.value = cpfMask(e.target.value);
-                }}
-                type="text"
-                placeholder="123.456.789-00"
-                className="w-full px-10 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 md:space-y-6">
 
-              {errors.cpf?.type === "required" && (
-                <p className="text-red-500 text-sm">CPF é obrigatório.</p>
-              )}
-              {errors.cpf?.type === "maxLength" && (
-                <p className="text-red-500 text-sm">
-                  Máximo de 11 caracteres permitido.
-                </p>
-              )}
-            </fieldset>
+                        {/* CPF */}
+                        <fieldset className="flex flex-col gap-2 relative">
+                            <label className="text-sm font-medium text-foreground">
+                                CPF *
+                            </label>
 
-            {/* SENHA */}
-            <fieldset className="flex flex-col gap-2">
-              <Input
-                register={register}
-                passwordExist={true}
-                rules={{ required: true, minLength: 8 }}
-                icon={
-                  <Lock size={20} className="absolute left-3 top-12 text-gray-500" />
-                }
-                id="password"
-                label="Senha *"
-                placeholder="Digite sua senha"
-                name="password"
-                type="password"
-                errors={errors}
-              />
+                            <FileUser size={20} className="absolute left-3 top-12 text-gray-500" />
 
-              {errors.password?.type === "required" && (
-                <p className="text-red-500 text-sm">Senha é obrigatória.</p>
-              )}
-              {errors.password?.type === "minLength" && (
-                <p className="text-red-500 text-sm">
-                  Mínimo de 8 caracteres.
-                </p>
-              )}
-            </fieldset>
+                            <input
+                                {...register("cpf", { required: true, maxLength: 14 })}
+                                onChange={(e) => { e.target.value = cpfMask(e.target.value); }}
+                                type="text"
+                                placeholder="123.456.789-00"
+                                className="w-full px-10 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                            />
 
-            {/* ERRO LOGIN */}
-            {!loginExist && (
-              <p className="text-red-500 text-sm -mt-2">
-                CPF ou senha incorretos.
-              </p>
-            )}
+                            {errors.cpf && (
+                                <p className="text-red-500 text-sm">
+                                    {errors.cpf.type === "required"
+                                        ? "CPF é obrigatório."
+                                        : "Máximo de 11 caracteres permitido."}
+                                </p>
+                            )}
+                        </fieldset>
 
-            {/* BOTÃO */}
-            <Button type="submit" size="lg" className="w-full text-white">
-              Entrar
-            </Button>
+                        {/* SENHA */}
+                        <fieldset className="flex flex-col gap-2">
+                            <Input
+                                register={register}
+                                passwordExist={true}
+                                rules={{ required: true, minLength: 8 }}
+                                icon={<Lock size={20} className="absolute left-3 top-12 text-gray-500" />}
+                                id="password"
+                                label="Senha *"
+                                placeholder="Digite sua senha"
+                                name="password"
+                                type="password"
+                                errors={errors}
+                            />
+                        </fieldset>
 
-            {/* CRIAR CONTA */}
-            <div className="text-center flex gap-2 justify-center mt-2">
-              <Text size="md" colors="mutedForeground">Não tem conta?</Text>
-              <button
-                type="button"
-                onClick={() => navigate("/registrar")}
-                className="text-primary underline font-medium"
-              >
-                Criar conta agora
-              </button>
+                        {!loginExist && (
+                            <p className="text-red-500 text-sm -mt-2">
+                                CPF ou senha incorretos.
+                            </p>
+                        )}
+
+                        <Button type="submit" size="lg" className="w-full text-white">
+                            Entrar
+                        </Button>
+
+                        <div className="text-center flex gap-2 justify-center mt-1">
+                            <Text size="md" colors="mutedForeground">Não tem conta?</Text>
+                            <button
+                                type="button"
+                                onClick={() => navigate("/registrar")}
+                                className="text-primary underline font-medium"
+                            >
+                                Criar conta agora
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
-          </form>
         </div>
-
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Login;
