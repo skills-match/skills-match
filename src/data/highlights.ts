@@ -19,4 +19,5 @@ const highlights: IHighlights[] = [
     },
   ];
 
+
 export default highlights;
