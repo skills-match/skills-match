@@ -1,10 +1,11 @@
 interface ISubtitle {
   children: React.ReactNode;
+  position?: "center" | "left" | "right";
 }
 
-const Subtitle = ({ children }: ISubtitle) => {
+const Subtitle = ({ children, position = "center" }: ISubtitle) => {
   return (
-    <p className="text-4xl font-bold text-foreground mb-4 text-center">
+    <p className={`text-3xl font-bold text-foreground mb-4 ${position === "center" ? "text-center" : position === "left" ? "text-left" : "text-right"} `}>
       {children}
     </p>
   );
