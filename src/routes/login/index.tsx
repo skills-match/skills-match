@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/button/Button";
 import { FileUser, Lock, CheckCircle2, Sparkles } from "lucide-react";
-import InputLogin from "@/components/ui/input/Input-login";
 import { useForm } from "react-hook-form";
 import { cpfMask } from "@/utils/mask/cpf-mask";
 import { verifyUser } from "@/services/api";
@@ -11,6 +10,7 @@ import IProfileData from "@/interfaces/IProfile-data";
 import { H3 } from "@/components/ui/textos/H3";
 import { Text } from "@/components/ui/textos/Text";
 import Title from "@/components/ui/textos/Title";
+import Input from "@/components/ui/input/Input-login";
 
 const Login = () => {
   const location = useLocation();
@@ -111,7 +111,7 @@ const Login = () => {
 
             {/* CPF */}
             <fieldset className="flex flex-col gap-2 relative">
-              <label className="text-md font-medium text-foreground">
+              <label className="text-sm font-medium text-foreground">
                 CPF *
               </label>
 
@@ -124,7 +124,7 @@ const Login = () => {
                 }}
                 type="text"
                 placeholder="123.456.789-00"
-                className="w-full px-10 py-3 border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-10 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
 
               {errors.cpf?.type === "required" && (
@@ -139,7 +139,7 @@ const Login = () => {
 
             {/* SENHA */}
             <fieldset className="flex flex-col gap-2">
-              <InputLogin
+              <Input
                 register={register}
                 passwordExist={true}
                 rules={{ required: true, minLength: 8 }}
@@ -178,11 +178,11 @@ const Login = () => {
 
             {/* CRIAR CONTA */}
             <div className="text-center flex gap-2 justify-center mt-2">
-              <Text>Não tem conta?</Text>
+              <Text size="md" colors="mutedForeground">Não tem conta?</Text>
               <button
                 type="button"
                 onClick={() => navigate("/registrar")}
-                className="text-primary font-medium hover:underline"
+                className="text-primary underline font-medium"
               >
                 Criar conta agora
               </button>

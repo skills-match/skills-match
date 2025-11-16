@@ -3,7 +3,7 @@ import { Eye, EyeClosed } from "lucide-react";
 import { ChangeEventHandler, useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
-type InputLoginProps = {
+type InputProps = {
   label: string;
   placeholder: string;
   icon: React.ReactNode;
@@ -19,7 +19,7 @@ type InputLoginProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const InputLogin = ({
+const Input = ({
   label,
   placeholder,
   icon,
@@ -32,7 +32,7 @@ const InputLogin = ({
   rules,
   disabled,
   onChange
-}: InputLoginProps, isEditing: boolean) => {
+}: InputProps, isEditing: boolean) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const handleClick = () => {
@@ -64,7 +64,7 @@ const InputLogin = ({
         type={passwordExist && !showPassword ? "text" : type}
         id={id}
         name={name}
-        className={`w-full px-10 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${!isEditing ? "text-gray-500" : ""}`}
+        className={`w-full px-10 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${!isEditing ? "text-muted-foreground" : ""}`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -74,4 +74,4 @@ const InputLogin = ({
   );
 };
 
-export default InputLogin;
+export default Input;
