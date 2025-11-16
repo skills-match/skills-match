@@ -14,7 +14,7 @@ import { navigationItems } from "@/data/navigation-items";
 
 const Header: React.FC = () => {
   const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   const [isLoggedIn] = useState<string>(localStorage.getItem("loggedIn"));
 
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden xl:flex space-x-2 items-center">
+          <nav className="hidden lg:flex space-x-2 items-center">
             {navigationItems.map(
               (item) =>
                 item.name !== "Entrar" &&
@@ -73,7 +73,7 @@ const Header: React.FC = () => {
                 <Button
                   onClick={() => navigate("/login")}
                   size="sm"
-                  className="hidden xl:flex gap-2 items-center justify-center "
+                  className="hidden lg:flex gap-2 items-center justify-center "
                   variant="outline"
                 >
                   {" "}
@@ -85,7 +85,7 @@ const Header: React.FC = () => {
                 <Button
                   onClick={() => navigate("/registrar")}
                   size="sm"
-                  className="hidden xl:flex gap-2 items-center text-white justify-center"
+                  className="hidden lg:flex gap-2 items-center text-white justify-center"
                   variant="primary"
                 >
                   {" "}
@@ -117,7 +117,7 @@ const Header: React.FC = () => {
                   size="sm"
                   onClick={() => navigateProfile()}
                   variant="primary"
-                  className="hidden xl:flex gap-2 items-center"
+                  className="hidden lg:flex gap-2 items-center"
                 >
                   <i>
                     {" "}
@@ -133,7 +133,7 @@ const Header: React.FC = () => {
           {isMobileMenuOpen === false ? (
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="xl:hidden p-2 rounded-lg text- text-foreground"
+              className="lg:hidden p-2 rounded-lg text- text-foreground"
               aria-label="Abrir menu"
             >
               <MenuIcon />
@@ -141,7 +141,7 @@ const Header: React.FC = () => {
           ) : (
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="xl:hidden p-2 rounded-lg text-foreground"
+              className="lg:hidden p-2 rounded-lg text-foreground"
               aria-label="Fechar menu"
             >
               <X />
@@ -151,7 +151,7 @@ const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="xl:hidden py-4 border-t border-border">
+          <div className="lg:hidden py-4 border-t border-border">
             <nav className="space-y-2">
               {navigationItems
                 .filter(
