@@ -1,18 +1,20 @@
-import plans from "@/data/Plans";
+
 import Button from "../ui/button/Button";
 import { useNavigate } from "react-router-dom";
 import Subtitle from "../ui/textos/Subtitle";
 import { Text } from "@/components/ui/textos/Text";
+import plans from "@/data/plans";
 
 const Plans = () => {
 
     const navigate = useNavigate();
 
     return ( 
-      <section className="py-20 px-6 text-start">
-      <Subtitle>Planos disponíveis</Subtitle>
+      <section className="py-20 px-6">
 
+  <Subtitle>Planos disponíveis</Subtitle>
       <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
+        
         {plans.map((plan) => (
           <div
             key={plan.id}
