@@ -50,7 +50,7 @@ export default function SkillsMatchAccordion() {
   
 
   return (
-    <div className="w-full flex justify-center px-4 py-16">
+    <div className="w-full flex justify-center px-4 py-20">
 
       <div className="w-full max-w-5xl">
 

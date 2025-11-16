@@ -133,7 +133,7 @@ const Header: React.FC = () => {
           {isMobileMenuOpen === false ? (
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="xl:hidden p-2 rounded-lg text- text-foreground hover:bg-accent"
+              className="xl:hidden p-2 rounded-lg text- text-foreground"
               aria-label="Abrir menu"
             >
               <MenuIcon />
@@ -141,7 +141,7 @@ const Header: React.FC = () => {
           ) : (
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="xl:hidden p-2 rounded-lg text-foreground hover:bg-accent"
+              className="xl:hidden p-2 rounded-lg text-foreground"
               aria-label="Fechar menu"
             >
               <X />
