@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/button/Button";
-import { FileUser, Lock, CheckCircle2, Sparkles } from "lucide-react";
+import { FileUser, Lock, CheckCircle2, Sparkles, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { cpfMask } from "@/utils/mask/cpf-mask";
 import { verifyUser } from "@/services/api";
@@ -122,27 +122,31 @@ const Login = () => {
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 md:space-y-6">
 
-                        {/* CPF */}
-                        <fieldset className="flex flex-col gap-2 relative">
-                            <label className="text-sm font-medium text-foreground">
-                                CPF *
-                            </label>
-
-                            <FileUser size={20} className="absolute left-3 top-12 text-gray-500" />
-
-                            <input
-                                {...register("cpf", { required: true, maxLength: 14 })}
-                                onChange={(e) => { e.target.value = cpfMask(e.target.value); }}
+                        {/* EMAIL */}
+                        <fieldset className="flex flex-col gap-2">
+                            <Input
+                                register={register}
+                                rules={{
+                                    required: true,
+                                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                }}
+                                icon={
+                                    <Mail size={20} className="absolute left-3 top-12 text-gray-500" />
+                                }
+                                id="email"
+                                label="Email *"
+                                placeholder="Seu Email"
+                                name="email"
                                 type="text"
-                                placeholder="123.456.789-00"
-                                className="w-full px-10 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                errors={errors}
                             />
 
-                            {errors.cpf && (
+                            {errors.email?.type === "required" && (
+                                <p className="text-red-500 text-sm">Email é obrigatório.</p>
+                            )}
+                            {errors.email?.type === "pattern" && (
                                 <p className="text-red-500 text-sm">
-                                    {errors.cpf.type === "required"
-                                        ? "CPF é obrigatório."
-                                        : "Máximo de 11 caracteres permitido."}
+                                    Email deve ser válido.
                                 </p>
                             )}
                         </fieldset>
