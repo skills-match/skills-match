@@ -1,150 +1,154 @@
-// import React from "react";
-// import H1 from "@/components/ui/textos/Title";
-// import { CircleCheck, CircleUser, Heart, Lightbulb, Mail } from "lucide-react";
-// import { Paragraph } from "@/components/ui/textos/Paragraph";
-// import { developers } from "@/data/developer";
-// import { H3 } from "@/components/ui/textos/H3";
-// import H2 from "@/components/ui/textos/H2";
+import Title from "@/components/ui/textos/Title";
+import Subtitle from "@/components/ui/textos/Subtitle";
+import { Text } from "@/components/ui/textos/Text";
+import { CheckCircle2, Target, Users, Sparkles } from "lucide-react";
 
-// const About: React.FC = () => {
-//   return (
-//     <div className="bg-background py-16">
-//       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-//         {/* Header */}
-//         <div className="text-center mb-12 flex flex-col items-center justify-center">
-//           <H1>Sobre Nosso Projeto</H1>
-//           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-//             Somos uma equipe dedicada a tornar os serviços de saúde mais
-//             acessíveis para pessoas idosas e com dificuldades tecnológicas.
-//           </p>
-//         </div>
+export default function About() {
+  return (
+    <div className="w-full min-h-screen bg-background text-foreground py-20 px-6 text-start">
+      {/* Header */}
+      <section className="max-w-5xl mx-auto flex flex-col gap-4 mb-16">
+        <Title>Sobre o Skills Match</Title>
+        <Text
+          size="lg"
+          colors="mutedForeground"
+          className="text-lg md:text-2xl mb-8"
+        >
+          Conectando autoconhecimento, educação e empregabilidade em um só
+          lugar.
+        </Text>
+      </section>
 
-//         {/* Mission */}
-//         <div className="rounded-xl p-8 shadow-md border border-border mb-16">
-//           <H3 isStronger={true}>Nossa Missão</H3>
-//           <Paragraph>
-//             Criar um ambiente digital inclusivo e acessível que permita a todas
-//             as pessoas, independentemente de sua familiaridade com a tecnologia,
-//             acessarem facilmente os serviços do Hospital das Clínicas.
-//             Acreditamos que o acesso à saúde deve ser simples, claro e livre de
-//             barreiras tecnológicas.
-//           </Paragraph>
-//         </div>
+      {/* Problema */}
+      <section className="max-w-5xl mx-auto mb-20 bg-white rounded-2xl shadow-md p-10 ">
+        <Subtitle position="left">O Problema</Subtitle>
 
-//         {/* Team */}
-//         <div className="mb-16">
-//           <H2>Conheça Nossa Equipe</H2>
-//           <div className="grid md:grid-cols-3 gap-8 mt-5">
-//             {developers.map((developer, index) => (
-//               <div
-//                 key={index}
-//                 className="bg-surface rounded-xl p-6 shadow-md border border-border text-center hover:shadow-lg transition-shadow flex flex-col items-center"
-//               >
-//                 <div className="bg-gradient-primary rounded-full mb-4 flex items-center justify-center w-48 h-48">
-//                   <div className="w-44 h-44 rounded-full overflow-hidden border-4 border-white">
-//                     <img
-//                       src={developer.image}
-//                       alt={developer.name}
-//                       className="object-cover w-full h-full"
-//                     />
-//                   </div>
-//                 </div>
+        <ul className="mt-6 space-y-4">
+          {[
+            "Milhares de jovens e profissionais enfrentam dúvidas sobre qual profissão seguir.",
+            "A maioria dos testes vocacionais é genérica e não reflete soft e hard skills reais.",
+            "O mercado busca perfis híbridos e personalizados, mas não há ferramenta confiável que conecte tudo isso.",
+          ].map((item, i) => (
+            <li key={i} className="flex items-center gap-4 ">
+              <div
+                className="w-2 h-2 bg-primary rounded-full relative
+                before:content-[''] before:absolute before:inset-0 
+              before:bg-purple-400 before:rounded-full before:opacity-30 
+                before:scale-[2.2] before:animate-pulse"
+              ></div>
 
-//                 <h3 className="text-xl font-semibold text-blue-700 mb-2">
-//                   {developer.name}
-//                 </h3>
+              <Text className="max-w-64 md:max-w-none" colors="mutedForeground">
+                {item}
+              </Text>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-//                 <Paragraph>{developer.description}</Paragraph>
+      {/* Solução */}
+      <section className="max-w-5xl mx-auto mb-20">
+        <Subtitle>Nossa Solução</Subtitle>
 
-//                 <p className="text-lg font-medium mt-4">
-//                   Turma: <span className="font-semibold">1TDSPG</span>
-//                 </p>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
+        <Text colors="mutedForeground" className="mt-8">
+          O Skills Match é uma plataforma digital de autodescoberta profissional
+          com IA que cruza dados de habilidades comportamentais e técnicas para
+          recomendar carreiras, cursos e oportunidades alinhadas ao perfil do
+          usuário.
+        </Text>
 
-//         {/* Values */}
-//         <div className="bg-accent rounded-xl p-8 mb-16">
-//           <H2>Nossos Valores</H2>
-//           <div className="grid md:grid-cols-2 gap-8 mt-5">
-//             <div className="flex items-start space-x-3">
-//               <div className="w-6 h-6 text-primary mt-1">
-//                 <CircleCheck className="text-blue-700" />
-//               </div>
-//               <div>
-//                 <H3 isStronger={true}>Acessibilidade</H3>
-//                 <Paragraph>
-//                   Criamos soluções que todos podem usar, independente da idade
-//                   ou habilidade tecnológica.
-//                 </Paragraph>
-//               </div>
-//             </div>
+        <div className="grid md:grid-cols-3 gap-6 mt-10">
+          {[
+            {
+              icon: <Target className="text-primary" size={28} />,
+              title: "Teste Personalizado",
+              text: "IA que analisa seu comportamento, interesses e aptidões.",
+            },
+            {
+              icon: <Sparkles className="text-primary" size={28} />,
+              title: "Insights Profundos",
+              text: "Mapa completo de competências e recomendações.",
+            },
+            {
+              icon: <Users className="text-primary" size={28} />,
+              title: "Impacto Social",
+              text: "Reduz escolhas equivocadas e evasão escolar.",
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-2xl shadow-md p-8 flex flex-col gap-3 border"
+            >
+              <div className="bg-primary/10 p-3 rounded-xl w-fit">
+                {item.icon}
+              </div>
+              <h3 className="font-semibold text-lg">{item.title}</h3>
+              <Text colors="mutedForeground">{item.text}</Text>
+            </div>
+          ))}
+        </div>
+      </section>
 
-//             <div className="flex items-start space-x-3">
-//               <div className="w-6 h-6 text-primary mt-1">
-//                 <Heart className="text-blue-700" />
-//               </div>
-//               <div>
-//                 <H3 isStronger={true}>Empatia</H3>
-//                 <Paragraph>
-//                   Entendemos as dificuldades e criamos soluções pensando no
-//                   usuário em primeiro lugar.
-//                 </Paragraph>
-//               </div>
-//             </div>
+      {/* Missão + Diferencial */}
+      <section className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
+        <div className="bg-primary/5 border border-transparent hover:border-primary/50 transform transition-all 
+        duration-500 p-8 rounded-2xl shadow-sm  hover:shadow-lg hover:shadow-primary/20">
+          <Subtitle>Nossa Missão</Subtitle>
+          <Text colors="mutedForeground" className="mt-4">
+            Empoderar jovens e profissionais a fazer escolhas de carreira mais
+            conscientes e alinhadas ao seu potencial, democratizando o acesso à
+            orientação vocacional com IA.
+          </Text>
+        </div>
 
-//             <div className="flex items-start space-x-3">
-//               <div className="w-6 h-6 text-primary mt-1">
-//                 <Lightbulb className="text-blue-700" />
-//               </div>
-//               <div>
-//                 <H3 isStronger={true}>Simplicidade</H3>
-//                 <Paragraph>
-//                   Mantemos tudo simples e direto, sem complicações
-//                   desnecessárias.
-//                 </Paragraph>
-//               </div>
-//             </div>
+        <div className="bg-primary/5 border border-transparent hover:border-primary/50 transform transition-all 
+        duration-500 p-8 rounded-2xl shadow-sm  hover:shadow-lg hover:shadow-primary/20">
+          <Subtitle>Nosso Diferencial</Subtitle>
 
-//             <div className="flex items-start space-x-3">
-//               <div className="w-6 h-6 text-primary mt-1">
-//                 <CircleUser className="text-blue-700" />
-//               </div>
-//               <div>
-//                 <H3 isStronger={true}>Suporte</H3>
-//                 <Paragraph>
-//                   Oferecemos ajuda personalizada sempre que necessário.
-//                 </Paragraph>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
+          <ul className="mt-4 space-y-3 text-sm">
+            {[
+              "IA personalizada que entende o perfil humano individualmente.",
+              "Interface acessível e linguagem acolhedora.",
+              "Precisão que cresce conforme mais usuários utilizam a plataforma.",
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-4">
+                <CheckCircle2 size={18} className="text-primary mt-1" />
+                <Text className="max-w-64 md:max-w-none" colors="foreground">
+                  {item}
+                </Text>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-//         {/* Contact CTA */}
-//         <div className="text-center">
-//           <h2 className="text-2xl font-bold text-foreground mb-4">
-//             Quer Saber Mais?
-//           </h2>
-//           <Paragraph>
-//             Entre em contato conosco para sugestões, dúvidas ou feedback sobre
-//             nosso projeto.
-//           </Paragraph>
-//           <a
-//             href="mailto:hcconecta@gmail.com"
-//             className="inline-flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
-//           >
-//             <div className="flex mt-3 gap-2 items-center">
-//               <Mail className="w-5 h-5 text-blue-700" />
-//               <span className="text-lg text-blue-700 font-medium">
-//                 hcconecta@gmail.com
-//               </span>
-//             </div>
-//           </a>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+      {/* Modelo de Negócio */}
+      <section className="max-w-5xl mx-auto mb-20 bg-white rounded-2xl shadow-md p-10">
+        <Subtitle position="left">Modelo de Negócio</Subtitle>
 
-// export default About;
+        <div className="mt-6 space-y-8">
+          <div>
+            <h3 className="font-bold text-xl mb-2">Gratuito</h3>
+            <Text colors="mutedForeground">
+              Teste básico e resultados iniciais para democratizar o acesso.
+            </Text>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-xl mb-2 text-primary">Premium</h3>
+            <Text colors="mutedForeground">
+              Relatório completo, mapa de competências e acompanhamento
+              contínuo.
+            </Text>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-xl mb-2">B2B</h3>
+            <Text colors="mutedForeground">
+              Soluções para escolas, empresas e hubs de talentos.
+            </Text>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

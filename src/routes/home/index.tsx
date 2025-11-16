@@ -10,8 +10,8 @@ import Features from "@/components/section/Features";
 import Plans from "@/components/section/Plans";
 
 export const Home = () => {
+  
   const navigate = useNavigate();
-
 
   return (
     <div className="w-full min-h-full bg-background text-gray-900 font-sans">
