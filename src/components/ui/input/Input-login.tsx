@@ -1,4 +1,4 @@
-import { NameValues } from "@/interfaces/global";
+import INameValues from "@/interfaces/IName-values";
 import { Eye, EyeClosed } from "lucide-react";
 import { ChangeEventHandler, useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
@@ -9,11 +9,11 @@ type InputProps = {
   icon: React.ReactNode;
   type?: string;
   id: string;
-  name: keyof NameValues;
+  name: keyof INameValues;
   value?: string;
   passwordExist?: boolean;
-  register?: UseFormRegister<NameValues>;
-  errors?: FieldErrors<NameValues>;
+  register?: UseFormRegister<INameValues>;
+  errors?: FieldErrors<INameValues>;
   rules?: object;
   disabled?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
