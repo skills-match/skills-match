@@ -1,63 +1,11 @@
+import Button from "@/components/ui/button/Button";
+import { steps } from "@/data/steps-form";
+import { Forward } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export const steps = [
-  {
-    id: 1,
-    title: "Responda o Questionário",
-    description: "Para a IA entender seu perfil",
-    info: "Responda perguntas inteligentes sobre seus interesses, comportamentos, habilidades e preferências profissionais. Isso leva apenas 5–10 minutos e é fundamental para gerar recomendações precisas.",
-    fields: [
-      {
-        id: "finishedSchool",
-        question: "Já terminou a escola? Se não, está em qual ano?",
-        type: "text",
-        placeholder: "Ex: Sim / Não, estou no 3º ano",
-      },
-      {
-        id: "professionalExperience",
-        question: "Já tem alguma experiência profissional?",
-        type: "text",
-        placeholder: "Ex: Sim, trabalhei como atendente / Não",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Fale Sobre Suas Habilidades",
-    description: "Para analisarmos seu perfil profissional",
-    info: "Liste suas melhores Soft e Hard Skills para entendermos sua compatibilidade com carreiras.",
-    fields: [
-      {
-        id: "softSkills",
-        question: "Quais são as suas 5 principais Soft Skills?",
-        type: "text",
-        placeholder: "Ex: Comunicação, Liderança, Organização...",
-      },
-      {
-        id: "hardSkills",
-        question: "Quais são as suas 5 principais Hard Skills?",
-        type: "text",
-        placeholder: "Ex: Programação, Excel, Design...",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "Avaliação Final",
-    description: "Para concluir sua análise profissional",
-    info: "Para finalizar, avalie sua performance profissional de forma sincera.",
-    fields: [
-      {
-        id: "professionalScore",
-        question: "De 0 a 10, o quão bom você é profissionalmente?",
-        type: "number",
-        placeholder: "Ex: 7",
-      },
-    ],
-  },
-];
 
-const Steps = ({ currentStep }: { currentStep: number }) => {
+const Steps = () => {
   const [formData, setFormData] = useState({
     finishedSchool: "",
     professionalExperience: "",
@@ -66,27 +14,21 @@ const Steps = ({ currentStep }: { currentStep: number }) => {
     professionalScore: "",
   });
 
-  const step = steps[currentStep];
+  const [index, setIndex] = useState<number>(0);
 
-  const handleChange = (fieldId: string, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [fieldId]: value,
-    }));
-  };
+  const step = steps[index];
+
+  const navigate = useNavigate();
 
   return (
     <div className="flex justify-center mt-10 mb-10">
       <div className="w-full max-w-4xl bg-white p-10 rounded-2xl shadow-sm">
-
         {/* Etapa + Título */}
         <p className="text-sm font-semibold text-indigo-600 mb-1">
           Etapa {step.id} de 3
         </p>
 
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">
-          {step.title}
-        </h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">{step.title}</h1>
 
         <p className="text-lg text-gray-600 mb-6">{step.description}</p>
 
@@ -104,16 +46,13 @@ const Steps = ({ currentStep }: { currentStep: number }) => {
             <input
               type={field.type}
               placeholder={field.placeholder}
-              value={(formData as any)[field.id]}
-              onChange={(e) => handleChange(field.id, e.target.value)}
+
               className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
             />
           </div>
         ))}
 
-        <p className="text-sm font-medium text-gray-700 mt-8 mb-2">
-          Progresso
-        </p>
+        <p className="text-sm font-medium text-gray-700 mt-8 mb-2">Progresso</p>
         <div className="w-full h-3 bg-gray-200 rounded-full">
           <div
             className="h-3 bg-indigo-500 rounded-full transition-all"
@@ -124,6 +63,22 @@ const Steps = ({ currentStep }: { currentStep: number }) => {
         <p className="text-right text-sm text-indigo-600 mt-2">
           {step.id} de 3
         </p>
+
+        <div className="flex gap-4">
+          <Button onClick={() =>  {
+            if(index >= steps.length - 1) {
+              navigate('/perfil');
+            }
+
+            setIndex(index + 1)
+
+          }} className="flex gap-2">
+            Continuar <Forward />
+          </Button>
+          {index > 0 && (
+           <Button size="md" variant="outline" onClick={() => setIndex(index - 1)}>Voltar</Button>
+          )}
+        </div>
       </div>
     </div>
   );

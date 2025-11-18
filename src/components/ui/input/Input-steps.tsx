@@ -1,38 +1,34 @@
-import INameValues from "@/interfaces/IName-values";
+import { IStepField } from "@/interfaces/ISteps-form";
 import { Eye, EyeClosed } from "lucide-react";
 import { ChangeEventHandler, useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
-type InputLoginProps = {
+type InputStepsProps = {
   label: string;
   placeholder: string;
-  icon: React.ReactNode;
-  type?: string;
+  type?: "text" | "number";
   id: string;
-  name: keyof INameValues;
+  name: keyof IStepField;
   value?: string;
-  passwordExist?: boolean;
-  register?: UseFormRegister<INameValues>;
-  errors?: FieldErrors<INameValues>;
+  register?: UseFormRegister<IStepField>;
+  errors?: FieldErrors<IStepField>;
   rules?: object;
   disabled?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const InputLogin = ({
+const InputSteps = ({
   label,
   placeholder,
-  icon,
   type,
   id,
   name,
   value,
-  passwordExist,
   register,
   rules,
   disabled,
   onChange
-}: InputLoginProps, isEditing: boolean) => {
+}: InputStepsProps, isEditing: boolean) => {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
   const handleClick = () => {
@@ -41,27 +37,10 @@ const InputLogin = ({
 
   return (
     <div className="relative">
-      <label
-        className="block text-md font-medium text-foreground mb-2"
-      >
-        {label}
-      </label>
-      {icon}
-
-      {passwordExist && (
-        <button
-          onClick={() => handleClick()}
-          type="button"
-          className="absolute right-3 top-12 text-gray-500 cursor-pointer z-50"
-        >
-          {showPassword ? <EyeClosed size={20} /> : <Eye size={20} />}
-        </button>
-      )}
-
       <input
         {...(register ? register(name, rules) : {})}
         disabled={disabled}
-        type={passwordExist && !showPassword ? "text" : type}
+        type={type}
         id={id}
         name={name}
         className={`w-full px-10 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${!isEditing ? "text-gray-500" : ""}`}
@@ -74,4 +53,4 @@ const InputLogin = ({
   );
 };
 
-export default InputLogin;
+export default InputSteps;

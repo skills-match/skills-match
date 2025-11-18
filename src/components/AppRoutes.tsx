@@ -17,7 +17,7 @@ const AppRoutes = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/sobre" element={<About />} />
           <Route path="/faq" element={<Faq />} />
-           <Route path="/etapas" element={<Steps currentStep={0}/>} />
+           <Route path="/etapas" element={<Steps />} />
           <Route element={<PrivateRoute />} >
            {/*  <Route path="/etapas" element={<Steps />} /> */}
           </Route>
