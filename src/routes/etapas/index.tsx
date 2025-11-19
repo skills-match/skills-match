@@ -4,7 +4,6 @@ import { Forward } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const Steps = () => {
   const [formData, setFormData] = useState({
     finishedSchool: "",
