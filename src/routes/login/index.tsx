@@ -4,12 +4,13 @@ import Button from "@/components/ui/button/Button";
 import { FileUser, Lock, CheckCircle2, Sparkles, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { cpfMask } from "@/utils/mask/cpf-mask";
-import { verifyUser } from "@/services/api";
+import { verifyUser } from "@/services/login-service";
 import ILoginContext from "@/interfaces/ILogin-context";
 import IProfileData from "@/interfaces/IProfile-data";
 import { Text } from "@/components/ui/textos/Text";
 import Title from "@/components/ui/textos/Title";
 import Input from "@/components/ui/input/Input-login";
+import INameValues from "@/interfaces/IName-values";
 
 const Login = () => {
     const location = useLocation();
@@ -36,9 +37,9 @@ const Login = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<IProfileData>();
+    } = useForm<INameValues>();
 
-    const onSubmit = async (data: IProfileData) => {
+    const onSubmit = async (data: INameValues) => {
         if (data) {
             const verify = await verifyUser(data);
 
@@ -169,7 +170,7 @@ const Login = () => {
 
                         {!loginExist && (
                             <p className="text-red-500 text-sm -mt-2">
-                                CPF ou senha incorretos.
+                                Email ou senha incorretos.
                             </p>
                         )}
 

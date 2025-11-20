@@ -1,8 +1,9 @@
 interface INameValues {
-    email: string;
-    password: string;
-    name: string;
-    age: string;
+    id?: string,
+    name: string,
+    email: string,
+    age: number | string,
+    password: string,
 }
 
 export default INameValues;

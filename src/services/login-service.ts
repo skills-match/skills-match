@@ -1,3 +1,4 @@
+import INameValues from "@/interfaces/IName-values";
 import IProfileData from "@/interfaces/IProfile-data";
 
 const BASE_URL: string = `${import.meta.env.VITE_API_URL}`;
@@ -31,11 +32,11 @@ export const createUser = async (data: IProfileData) => {
 
 export const verifyUser = async (data: IProfileData) => {
   
-    const URL: string = `${BASE_URL}/login?cpf=${data.email}&password=${data.password}`;
+    const URL: string = `${BASE_URL}?email=${data.email}&password=${data.password}`;
     try {
       const response = await fetch(URL, { method: "GET" });
       if (response.status === 200) {
-        const user: IProfileData = await response.json();
+        const user: INameValues = await response.json();
         localStorage.setItem("userId", user.id.toString());
         return user; 
       } else if (response.status === 404) {

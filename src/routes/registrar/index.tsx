@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { FileUser, Lock, User, Baby, CheckCircle2, Sparkles, Mail } from "lucide-react";
-
-import { cpfMask } from "@/utils/mask/cpf-mask";
-import { createUser } from "@/services/api";
+import { Lock, User, Baby, CheckCircle2, Sparkles, Mail } from "lucide-react";
+import { createUser } from "@/services/login-service";
 
 import Button from "@/components/ui/button/Button";
 import Title from "@/components/ui/textos/Title";
@@ -12,6 +10,7 @@ import { Text } from "@/components/ui/textos/Text";
 import Input from "@/components/ui/input/Input-login";
 
 import IProfileData from "@/interfaces/IProfile-data";
+import INameValues from "@/interfaces/IName-values";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -21,9 +20,9 @@ export default function Register() {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<IProfileData>();
+    } = useForm<INameValues>();
 
-    const onSubmit = async (data: IProfileData) => {
+    const onSubmit = async (data: INameValues) => {
         try {
             setLoading(true);
             await createUser(data);
