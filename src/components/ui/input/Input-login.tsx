@@ -1,29 +1,29 @@
-import INameValues from "@/interfaces/IName-values";
 import { Eye, EyeClosed } from "lucide-react";
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
-type InputProps = {
+type InputProps<T> = {
   label: string;
   placeholder: string;
   icon: React.ReactNode;
   type?: string;
   id: string;
-  name: keyof INameValues;
+  name: keyof T;
   value?: string;
   passwordExist?: boolean;
-  register?: UseFormRegister<INameValues>;
-  errors?: FieldErrors<INameValues>;
+  register?: UseFormRegister<T>;
+  errors?: FieldErrors<T>;
   rules?: object;
   disabled?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: string) => void;
+  isEditing?: boolean;
 };
 
-const Input = ({
+function Input<T>({
   label,
   placeholder,
   icon,
-  type,
+  type = "text",
   id,
   name,
   value,
@@ -31,26 +31,24 @@ const Input = ({
   register,
   rules,
   disabled,
-  onChange
-}: InputProps, isEditing: boolean) => {
+  onChange,
+  isEditing = true
+}: InputProps<T>) {
   const [showPassword, setShowPassword] = useState<boolean>(true);
 
-  const handleClick = () => {
-    setShowPassword(!showPassword);
-  };
+  const handleClick = () => setShowPassword(!showPassword);
 
   return (
     <div className="relative">
-      <label
-        className="block text-md font-medium text-foreground mb-2"
-      >
+      <label className="block text-md font-medium text-foreground mb-2">
         {label}
       </label>
+
       {icon}
 
       {passwordExist && (
         <button
-          onClick={() => handleClick()}
+          onClick={handleClick}
           type="button"
           className="absolute right-3 top-12 text-gray-500 cursor-pointer z-50"
         >
@@ -63,15 +61,16 @@ const Input = ({
         disabled={disabled}
         type={passwordExist && !showPassword ? "text" : type}
         id={id}
-        name={name}
-        className={`w-full px-10 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${!isEditing ? "text-muted-foreground" : ""}`}
+        name={String(name)}
+        className={`w-full px-10 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
+          !isEditing ? "text-muted-foreground" : ""
+        }`}
         placeholder={placeholder}
         value={value}
-        onChange={onChange}
+        onChange={(e) => onChange && onChange(e.target.value)}
       />
-      
     </div>
   );
-};
+}
 
 export default Input;

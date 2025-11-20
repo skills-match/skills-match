@@ -35,7 +35,7 @@ const Login = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<IProfileData>();
+    } = useForm<INameValues>();
 
     const onSubmit = async (data: IProfileData) => {
         if (data) {
