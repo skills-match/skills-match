@@ -1,4 +1,5 @@
-import { useState } from "react";
+import ILoginContext from "@/interfaces/ILogin-context";
+import { useEffect, useState } from "react";
 import { createContext, useContext } from "react";
 
 type AuthContextType = {
@@ -12,16 +13,21 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }) {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    return localStorage.getItem("loggedIn") === "true";
+  });
+
   const [isStepCompleted, setIsStepCompleted] = useState<boolean>(false);
 
   function login() {
     setIsAuthenticated(true);
+    localStorage.setItem("loggedIn", "true");
   }
 
   function logout() {
     setIsAuthenticated(false);
-    setIsStepCompleted(false);
+    localStorage.setItem("loggedIn", "false");
   }
 
   function completeSteps() {
@@ -44,3 +50,4 @@ export function useAuth() {
   }
   return context;
 }
+

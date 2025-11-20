@@ -1,36 +1,23 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/button/Button";
-import { FileUser, Lock, CheckCircle2, Sparkles, Mail } from "lucide-react";
+import { Lock, CheckCircle2, Sparkles, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
-import ILoginContext from "@/interfaces/ILogin-context";
 import { Text } from "@/components/ui/textos/Text";
 import Title from "@/components/ui/textos/Title";
 import Input from "@/components/ui/input/Input-login";
-import INameValues from "@/interfaces/IName-values";
 import { verifyUser } from "@/services/login-service";
+import { INameValues } from "@/interfaces/IName-values";
 import { useAuth } from "@/contexts/AuthContext";
 
 const Login = () => {
+
+  const {login, logout} = useAuth();
+
   const location = useLocation();
   const navigate = useNavigate();
 
   const [loginExist, setLoginExist] = useState<boolean>(true);
-
-  const [isLoggedIn, setIsLoggedIn] = useState<ILoginContext>(() => {
-    const stored = localStorage.getItem("loggedIn");
-    return { loggedIn: stored === "true" ? "true" : "false" };
-  });
-
-  const handleLogin = () => {
-    setIsLoggedIn({ loggedIn: "true" });
-    localStorage.setItem("loggedIn", "true");
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn({ loggedIn: "false" });
-    localStorage.setItem("loggedIn", "false");
-  };
 
   const {
     register,
@@ -43,13 +30,12 @@ const Login = () => {
       const verify = await verifyUser(data);
 
       if (verify !== false) {
-        handleLogin();
+        login();
         navigate("/home");
       } else {
+        logout();
         setLoginExist(false);
       }
-    } else {
-      handleLogout();
     }
   };
 

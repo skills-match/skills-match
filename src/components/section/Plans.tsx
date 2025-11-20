@@ -38,7 +38,7 @@ const Plans = () => {
 
               <Button
                 className="w-full mt-4"
-                onClick={() => navigate("/registrar")}
+                onClick={() => navigate("/etapas")}
               >
                 {plan.buttonLabel}
               </Button>

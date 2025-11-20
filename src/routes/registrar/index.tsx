@@ -8,9 +8,7 @@ import Button from "@/components/ui/button/Button";
 import Title from "@/components/ui/textos/Title";
 import { Text } from "@/components/ui/textos/Text";
 import Input from "@/components/ui/input/Input-login";
-
-import IProfileData from "@/interfaces/IProfile-data";
-import INameValues from "@/interfaces/IName-values";
+import { INameValues } from "@/interfaces/IName-values";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -84,7 +82,6 @@ export default function Register() {
                     </div>
                 </div>
 
-                {/* FORM DE REGISTRO */}
                 <div className="bg-white dark:bg-surface p-6 md:p-10 rounded-2xl shadow-xl border border-border w-full max-w-md mx-auto mb-5">
 
                     <div className="mb-6 md:mb-8 text-start md:text-left">

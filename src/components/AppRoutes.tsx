@@ -6,25 +6,27 @@ import Login from "@/routes/login";
 import NotFound from "@/routes/notFound";
 import Register from "@/routes/registrar";
 import About from "@/routes/sobre";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
+import Profile from "@/routes/perfil";
 
 const AppRoutes = () => {
+
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/home" element={<Home />} />
-        <Route path="/sobre" element={<About />} />
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/etapas" element={<Steps />} />
-        <Route element={<PrivateRoute />}>
-          {/*  <Route path="/etapas" element={<Steps />} /> */}
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/sobre" element={<About />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/etapas" element={<Steps />} />
+            <Route path="/perfil/:id" element={<Profile />} />
+          </Route>
         </Route>
-      </Route>
-      <Route path="*" element={<NotFound />} />\
-      <Route path="/login" element={<Login />} />
-      <Route path="/registrar" element={<Register />} />
-    </Routes>
+        <Route path="*" element={<NotFound />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registrar" element={<Register />} />
+      </Routes>
   );
 };
 
