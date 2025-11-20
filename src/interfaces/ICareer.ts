@@ -5,9 +5,10 @@ export interface ICarrer {
 }
 
 export interface IFieldFormsData {
-    professionalScore: string,
+    professionalScore: number,
     finishedSchool: string,
     professionalExperience: string,
     softSkills: string,
     hardSkills: string
 }
+
