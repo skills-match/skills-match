@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Button from "@/components/ui/button/Button";
 import { FileUser, Lock, CheckCircle2, Sparkles, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { cpfMask } from "@/utils/mask/cpf-mask";
 import { verifyUser } from "@/services/api";
 import ILoginContext from "@/interfaces/ILogin-context";
 import IProfileData from "@/interfaces/IProfile-data";

@@ -38,7 +38,7 @@ const Plans = () => {
 
               <Button
                 className="w-full mt-4"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/passo-a-passo")}
               >
                 {plan.buttonLabel}
               </Button>
