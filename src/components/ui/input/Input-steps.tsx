@@ -1,10 +1,8 @@
 import { IStepField } from "@/interfaces/ISteps-form";
-import { Eye, EyeClosed } from "lucide-react";
-import { ChangeEventHandler, useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 type InputStepsProps = {
-  label: string;
+  label?: string;
   placeholder: string;
   type?: "text" | "number";
   id: string;
@@ -14,41 +12,53 @@ type InputStepsProps = {
   errors?: FieldErrors<IStepField>;
   rules?: object;
   disabled?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: string) => void;
 };
 
 const InputSteps = ({
   label,
   placeholder,
-  type,
+  type = "text",
   id,
   name,
   value,
   register,
   rules,
   disabled,
-  onChange
-}: InputStepsProps, isEditing: boolean) => {
-  const [showPassword, setShowPassword] = useState<boolean>(true);
+  onChange,
+}: InputStepsProps) => {
+  const registerField = register ? register(name, rules) : {};
 
-  const handleClick = () => {
-    setShowPassword(!showPassword);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (registerField.onChange) {
+      registerField.onChange(e);
+    }
+
+    if (onChange) {
+      onChange(e.target.value);
+    }
   };
 
   return (
-    <div className="relative">
+    <div className="flex flex-col gap-1 w-full">
+      {label && (
+        <label htmlFor={id} className="text-lg font-semibold text-gray-800">
+          {label}
+        </label>
+      )}
+
       <input
-        {...(register ? register(name, rules) : {})}
-        disabled={disabled}
-        type={type}
         id={id}
         name={name}
-        className={`w-full px-10 py-3 border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${!isEditing ? "text-gray-500" : ""}`}
+        type={type}
+        disabled={disabled}
         placeholder={placeholder}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
+        onBlur={registerField.onBlur}
+        ref={registerField.ref}
+        className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
       />
-      
     </div>
   );
 };
