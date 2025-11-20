@@ -16,17 +16,16 @@ const AppRoutes = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/sobre" element={<About />} />
         <Route path="/faq" element={<Faq />} />
-         <Route path="/etapas" element={<Steps />} />
-          <Route element={<PrivateRoute />} >
-           {/*  <Route path="/etapas" element={<Steps />} /> */}
-          </Route>
+        <Route path="/etapas" element={<Steps />} />
+        <Route element={<PrivateRoute />}>
+          {/*  <Route path="/etapas" element={<Steps />} /> */}
+        </Route>
       </Route>
-
       <Route path="*" element={<NotFound />} />\
       <Route path="/login" element={<Login />} />
       <Route path="/registrar" element={<Register />} />
     </Routes>
   );
-}
+};
 
 export default AppRoutes;
