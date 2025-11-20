@@ -25,8 +25,8 @@ export const Home = () => {
           O Skills Match usa IA para te conectar com a profissão ideal com base nas suas habilidades. Teste agora e descubra seu potencial.
           </Text>
           <div className="flex gap-2 iterms-center justify-center flex-wrap">
-             <Button size="lg" className="flex gap-2 items-center justify-center" onClick={() => navigate("/cadastro")}>Comece agora <i> <ArrowRightIcon size={20} /> </i></Button>
-             <Button size="md" variant="outline" onClick={() => navigate("/")}>Saiba Mais</Button>
+             <Button size="lg" className="flex gap-2 items-center justify-center" onClick={() => navigate("/registrar")}>Comece agora <i> <ArrowRightIcon size={20} /> </i></Button>
+             <Button size="md" variant="outline" onClick={() => navigate("/sobre")}>Saiba Mais</Button>
           </div>
         </div>
       </section>
@@ -61,7 +61,7 @@ export const Home = () => {
         <Text colors="mutedForeground" size="lg" className="mb-8 max-w-2xl mx-auto">
         Teste agora com Skills Match e descubra a carreira perfeita para você.
         </Text>
-        <Button onClick={() => navigate("/")}>Testar agora</Button>
+        <Button onClick={() => navigate("/registrar")}>Testar agora</Button>
       </section>
     </div>
   );

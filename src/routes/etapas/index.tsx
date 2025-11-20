@@ -1,18 +1,33 @@
 import Button from "@/components/ui/button/Button";
 import InputSteps from "@/components/ui/input/Input-steps";
+import { Text } from "@/components/ui/textos/Text";
 import { steps } from "@/data/steps-form";
 import { ICarrer, IFieldFormsData } from "@/interfaces/ICareer";
+import { set } from "date-fns";
 import { Forward } from "lucide-react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 const Steps = () => {
+  const [messageError, setMessageError] = useState({
+    firstStep: false,
+    secondStep: false,
+    thirdStep: false,
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFieldFormsData | ICarrer>();
+
   const [formData, setFormData] = useState<IFieldFormsData & ICarrer>({
     finishedSchool: "",
     professionalExperience: "",
     softSkills: "",
     hardSkills: "",
-    professionalScore: "",
+    professionalScore: 0,
 
     skills: [],
     experience: [],
@@ -34,6 +49,16 @@ const Steps = () => {
 
   const handleNext = async () => {
     if (index === 0) {
+      if (
+        formData.finishedSchool == "" ||
+        formData.professionalExperience == ""
+      ) {
+        setMessageError({ ...messageError, firstStep: true });
+        return;
+      }
+
+      setMessageError({ ...messageError, firstStep: false });
+
       setFormData((prev) => ({
         ...prev,
         education: [prev.finishedSchool, prev.professionalExperience],
@@ -41,6 +66,13 @@ const Steps = () => {
     }
 
     if (index === 1) {
+      if (formData.softSkills == "" || formData.hardSkills == "") {
+        setMessageError({ ...messageError, secondStep: true });
+        return;
+      }
+
+      setMessageError({ ...messageError, secondStep: false });
+
       setFormData((prev) => ({
         ...prev,
         skills: [prev.softSkills, prev.hardSkills],
@@ -48,10 +80,19 @@ const Steps = () => {
     }
 
     if (index === 2) {
+      if (formData.professionalScore < 0 || formData.professionalScore > 10) {
+        setMessageError({ ...messageError, thirdStep: true });
+        return;
+      }
+
+      setMessageError({ ...messageError, thirdStep: false });
+
       const finalData = {
         ...formData,
         experience: [formData.professionalScore],
       };
+
+      const BASE_URL = import.meta.env.VITE_API_URL_FORM;
 
       await fetch("http://localhost:3000/steps", {
         method: "POST",
@@ -59,7 +100,7 @@ const Steps = () => {
         body: JSON.stringify(finalData),
       });
 
-      navigate("/perfil");
+      navigate("/home");
       return;
     }
 
@@ -69,13 +110,17 @@ const Steps = () => {
   return (
     <div className="flex justify-center mt-10 mb-10">
       <div className="w-full max-w-4xl bg-white p-10 rounded-2xl shadow-sm">
-        <p className="text-sm font-semibold text-indigo-600 mb-1">
+        <Text size="md" colors="primary" className="mb-3 font-medium">
           Etapa {step.id} de 3
-        </p>
+        </Text>
 
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">{step.title}</h1>
+        <Text colors="foreground" className="text-4xl font-bold mb-2">
+          {step.title}
+        </Text>
 
-        <p className="text-lg text-gray-600 mb-6">{step.description}</p>
+        <Text colors="mutedForeground" size="lg" className="mb-6">
+          {step.description}
+        </Text>
 
         <div className="p-5 bg-indigo-50 rounded-xl border border-indigo-100 text-gray-700 leading-relaxed mb-8">
           {step.info}
@@ -83,20 +128,24 @@ const Steps = () => {
 
         {step.fields.map((field) => (
           <div key={field.id} className="flex flex-col gap-2 mb-6">
-            <label className="text-lg font-semibold text-gray-800">
+            <label className="text-lg font-semibold text-foreground">
               {field.question}
             </label>
 
             <InputSteps
-              value={(formData as any)[field.id] || ""}
-              onChange={(value: string) => handleChange(field.id, value)}
+              value={(formData as IFieldFormsData | ICarrer)[field.id] || ""}
               type={field.type}
               placeholder={field.placeholder}
+              id={field.id}
+              name={field.id as keyof (IFieldFormsData | ICarrer)}
+              onChange={(e) => handleChange(field.id, e.target.value)}
             />
           </div>
         ))}
 
-        <p className="text-sm font-medium text-gray-700 mt-8 mb-2">Progresso</p>
+        <Text size="md" colors="foreground" className="font-medium mt-8 mb-2">
+          Progresso
+        </Text>
         <div className="w-full h-3 bg-gray-200 rounded-full">
           <div
             className="h-3 bg-indigo-500 rounded-full transition-all"
@@ -104,9 +153,9 @@ const Steps = () => {
           />
         </div>
 
-        <p className="text-right text-sm text-indigo-600 mt-2">
+        <Text size="sm" colors="primary" className="text-right mt-2">
           {step.id} de 3
-        </p>
+        </Text>
 
         <div className="flex gap-4">
           {index == 2 ? (
@@ -114,7 +163,7 @@ const Steps = () => {
               Finalizar
             </Button>
           ) : (
-            <Button onClick={(handleNext)} className="flex gap-2">
+            <Button onClick={handleNext} className="flex gap-2">
               Continuar <Forward />
             </Button>
           )}
@@ -128,6 +177,11 @@ const Steps = () => {
               Voltar
             </Button>
           )}
+        </div>
+        <div className="mt-5 text-red-500">
+          {messageError.firstStep ? <Text size="md"> Preencha as informações sobre escolaridade e experiência profissional. </Text> : ""}
+          {messageError.secondStep ? <Text size="md"> Preencha suas Soft Skills e Hard Skills. </Text> : ""}
+          {messageError.thirdStep ? <Text size="md"> Informe sua nota profissional de 0 a 10. </Text> : ""}
         </div>
       </div>
     </div>
