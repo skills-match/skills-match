@@ -120,7 +120,7 @@ export default function Register() {
                                 register={register}
                                 rules={{
                                     required: true,
-                                    validate: (value: number) => value >= 16 && value <= 120,
+                                    validate: (value: number) => value >= 18,
                                 }}
                                 icon={
                                     <Baby size={20} className="absolute left-3 top-12 text-gray-500" />
@@ -138,7 +138,7 @@ export default function Register() {
                             )}
                             {errors.age?.type === "validate" && (
                                 <p className="text-destructive text-sm">
-                                    Idade deve ser entre 16 e 120 anos.
+                                  A idade mínima é de 18 anos.
                                 </p>
                             )}
                         </fieldset>

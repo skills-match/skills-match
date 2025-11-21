@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/button/Button";
-import { Lock, CheckCircle2, Sparkles, Mail } from "lucide-react";
+import { Lock, CheckCircle2, Sparkles, Mail, Forward } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Text } from "@/components/ui/textos/Text";
 import Title from "@/components/ui/textos/Title";
@@ -18,6 +18,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [loginExist, setLoginExist] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -31,6 +32,7 @@ const Login = () => {
 
       if (verify !== false) {
         login();
+        setIsLoading(!isLoading);
         navigate("/home");
       } else {
         logout();
@@ -166,8 +168,8 @@ const Login = () => {
               </p>
             )}
 
-            <Button type="submit" size="lg" className="w-full text-white">
-              Entrar
+            <Button type="submit" size="lg" className="w-full text-white flex gap-2 items-center justify-center">
+              {!isLoading ? "Entrar" : "Entrando..."} <Forward />
             </Button>
 
             <div className="text-center flex gap-2 justify-center mt-1">

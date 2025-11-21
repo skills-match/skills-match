@@ -19,7 +19,7 @@ export const createUser = async (data: INameValues) => {
         });
 
         if (response.status != 201) {
-            console.error('Failed to create post:', response.statusText);
+            throw new Error(`Failed to create user: ${response.statusText}`)
         } else {
             const data = await response.json();
             return data;
@@ -39,11 +39,9 @@ export const verifyUser = async (data: INameValues) => {
         localStorage.setItem("userId", user.id.toString());
         return user; 
       } else if (response.status === 404) {
-        console.warn("Usuário não encontrado");
-        return false;
+        throw new Error(`User not found`)
       } else {
-        console.error("Erro inesperado:", response.statusText);
-        return false;
+       throw new Error("Unexpected error");
       }
     } catch (error) {
       console.log(`Erro ao verificar usuário: ${error}`);
@@ -53,7 +51,7 @@ export const verifyUser = async (data: INameValues) => {
 
 export const updateUser = async (data: INameValues, id: string) => {
 
-    const URL: string = `${BASE_URL}/atualiza-paciente/${id}`;
+    const URL: string = `${BASE_URL}/usuarios/atualiza-usuario/${id}`;
 
     const dataUpdate: INameValues = {
         name: data.name.trim(),
@@ -72,8 +70,7 @@ export const updateUser = async (data: INameValues, id: string) => {
         });
 
         if (response.status !== 201) {
-            console.error("Failed to update user:", response.statusText);
-            return false;
+            throw new Error(`Failed to Update profile: ${response.statusText}`)
         } else {
             const data = await response.json();
             return data;
@@ -83,11 +80,11 @@ export const updateUser = async (data: INameValues, id: string) => {
     }
 };
 
-export const listUsers = async (url: string) => {  
-    const response = await fetch(url, { method: "GET" });
+export const listUsers = async (id: string) => {  
+
+    const response = await fetch(`${BASE_URL}/usuarios/${id}`, { method: "GET" });
     if (response.status !== 200) {
-        console.error("Failed to Get profile:", response.statusText);
-        return false;
+        throw new Error(`Failed to Get profile: ${response.statusText}`)
     } else {
         const data = await response.json();
         return data;

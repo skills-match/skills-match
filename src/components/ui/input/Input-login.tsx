@@ -1,6 +1,6 @@
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormRegister, Path } from "react-hook-form";
 
 type InputProps<T> = {
   label: string;
@@ -8,7 +8,7 @@ type InputProps<T> = {
   icon: React.ReactNode;
   type?: string;
   id: string;
-  name: keyof T;
+  name: Path<T>;
   value?: string;
   passwordExist?: boolean;
   register?: UseFormRegister<T>;
