@@ -105,6 +105,7 @@ const Header: React.FC = () => {
                   onClick={() => {
                     navigate("/home");
                     logout()
+                    window.location.reload();
                   }}
                   variant="outline"
                   className="hidden xl:flex gap-2 items-center"
@@ -233,6 +234,7 @@ const Header: React.FC = () => {
                         setIsMobileMenuOpen(false);
                         navigate("/home");
                         logout();
+                        window.location.reload();
                       }}
                       className="block rounded-lg font-medium transition-colors text-primary"
                     >

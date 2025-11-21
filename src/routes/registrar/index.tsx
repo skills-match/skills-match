@@ -110,7 +110,7 @@ export default function Register() {
                             />
 
                             {errors.name && (
-                                <p className="text-red-500 text-sm">Nome é obrigatório.</p>
+                                <p className="text-destructive text-sm">Nome é obrigatório.</p>
                             )}
                         </fieldset>
 
@@ -134,10 +134,10 @@ export default function Register() {
                             />
 
                             {errors.age?.type === "required" && (
-                                <p className="text-red-500 text-sm">Idade é obrigatória.</p>
+                                <p className="text-destructive text-sm">Idade é obrigatória.</p>
                             )}
                             {errors.age?.type === "validate" && (
-                                <p className="text-red-500 text-sm">
+                                <p className="text-destructive text-sm">
                                     Idade deve ser entre 16 e 120 anos.
                                 </p>
                             )}
@@ -163,10 +163,10 @@ export default function Register() {
                             />
 
                             {errors.email?.type === "required" && (
-                                <p className="text-red-500 text-sm">Email é obrigatório.</p>
+                                <p className="text-destructive text-sm">Email é obrigatório.</p>
                             )}
                             {errors.email?.type === "pattern" && (
-                                <p className="text-red-500 text-sm">
+                                <p className="text-destructive text-sm">
                                     Email deve ser válido.
                                 </p>
                             )}
@@ -190,10 +190,10 @@ export default function Register() {
                             />
 
                             {errors.password?.type === "required" && (
-                                <p className="text-red-500 text-sm">Senha é obrigatória.</p>
+                                <p className="text-destructive text-sm">Senha é obrigatória.</p>
                             )}
                             {errors.password?.type === "minLength" && (
-                                <p className="text-red-500 text-sm">Mínimo de 8 caracteres.</p>
+                                <p className="text-destructive text-sm">Mínimo de 8 caracteres.</p>
                             )}
                         </fieldset>
 

@@ -132,10 +132,10 @@ const Login = () => {
               />
 
               {errors.email?.type === "required" && (
-                <p className="text-red-500 text-sm">Email é obrigatório.</p>
+                <p className="text-destructive text-sm">Email é obrigatório.</p>
               )}
               {errors.email?.type === "pattern" && (
-                <p className="text-red-500 text-sm">Email deve ser válido.</p>
+                <p className="text-destructive text-sm">Email deve ser válido.</p>
               )}
             </fieldset>
 
@@ -161,7 +161,7 @@ const Login = () => {
             </fieldset>
 
             {!loginExist && (
-              <p className="text-red-500 text-sm -mt-2">
+              <p className="text-destructive text-sm -mt-2">
                 Email ou senha incorretos.
               </p>
             )}

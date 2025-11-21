@@ -178,7 +178,7 @@ const Steps = () => {
             </Button>
           )}
         </div>
-        <div className="mt-5 text-red-500">
+        <div className="mt-5 text-destructive text-sm">
           {messageError.firstStep ? <Text size="md"> Preencha as informações sobre escolaridade e experiência profissional. </Text> : ""}
           {messageError.secondStep ? <Text size="md"> Preencha suas Soft Skills e Hard Skills. </Text> : ""}
           {messageError.thirdStep ? <Text size="md"> Informe sua nota profissional de 0 a 10. </Text> : ""}
