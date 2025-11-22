@@ -19,7 +19,7 @@ const plans: IPlan[] = [
       id: "premium",
       title: "Work Match Premium",
       subtitle: "Para quem busca orientação profunda",
-      price: "R$ 29,90",
+      price: "R$ 19,90",
       features: [
         "Tudo do plano gratuito",
         "Relatório Work Match completo",
