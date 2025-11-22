@@ -11,12 +11,15 @@ import {
   X,
 } from "lucide-react";
 import { navigationItems } from "@/data/navigation-items";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header: React.FC = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
-  const [isLoggedIn] = useState<string>(localStorage.getItem("loggedIn"));
+  const {isAuthenticated, logout} = useAuth();
+
+  const [isLoggedIn] = useState<boolean>(isAuthenticated);
 
   const navigateProfile = (): void => {
     const userId: string | null = localStorage.getItem("userId");
@@ -68,7 +71,7 @@ const Header: React.FC = () => {
                 )
             )}
 
-            {isLoggedIn !== "true" ? (
+            {isLoggedIn !== true ? (
               <div className="flex gap-3">
                 <Button
                   onClick={() => navigate("/login")}
@@ -101,7 +104,7 @@ const Header: React.FC = () => {
                   size="sm"
                   onClick={() => {
                     navigate("/home");
-                    localStorage.setItem("loggedIn", "false");
+                    logout()
                     window.location.reload();
                   }}
                   variant="outline"
@@ -175,7 +178,7 @@ const Header: React.FC = () => {
                   </button>
                 ))}
 
-              {isLoggedIn !== "true" ? (
+              {isLoggedIn !== true ? (
                 <>
                   <div className="flex items-center px-2 py-3 gap-2">
                     <i>
@@ -230,7 +233,7 @@ const Header: React.FC = () => {
                       onClick={() => {
                         setIsMobileMenuOpen(false);
                         navigate("/home");
-                        localStorage.setItem("loggedIn", "false");
+                        logout();
                         window.location.reload();
                       }}
                       className="block rounded-lg font-medium transition-colors text-primary"

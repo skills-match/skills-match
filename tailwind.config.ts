@@ -24,19 +24,19 @@ export default {
         
         // Cores primárias
         primary: {
-          DEFAULT: '#6366f1',      // Azul Índigo
+          DEFAULT: '#6366f1',
           foreground: '#ffffff',
         },
         
         // Cores secundárias
         secondary: {
-          DEFAULT: '#8b5cf6',      // Violeta
+          DEFAULT: '#8b5cf6',
           foreground: '#ffffff',
         },
         
         // Cores de destaque
         accent: {
-          DEFAULT: '#a78bfa',      // Violeta Claro
+          DEFAULT: '#a78bfa',
           foreground: '#262626',
         },
         

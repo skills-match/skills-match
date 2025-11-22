@@ -8,9 +8,7 @@ import Button from "@/components/ui/button/Button";
 import Title from "@/components/ui/textos/Title";
 import { Text } from "@/components/ui/textos/Text";
 import Input from "@/components/ui/input/Input-login";
-
-import IProfileData from "@/interfaces/IProfile-data";
-import INameValues from "@/interfaces/IName-values";
+import { INameValues } from "@/interfaces/IName-values";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -84,7 +82,6 @@ export default function Register() {
                     </div>
                 </div>
 
-                {/* FORM DE REGISTRO */}
                 <div className="bg-white dark:bg-surface p-6 md:p-10 rounded-2xl shadow-xl border border-border w-full max-w-md mx-auto mb-5">
 
                     <div className="mb-6 md:mb-8 text-start md:text-left">
@@ -113,7 +110,7 @@ export default function Register() {
                             />
 
                             {errors.name && (
-                                <p className="text-red-500 text-sm">Nome é obrigatório.</p>
+                                <p className="text-destructive text-sm">Nome é obrigatório.</p>
                             )}
                         </fieldset>
 
@@ -123,7 +120,7 @@ export default function Register() {
                                 register={register}
                                 rules={{
                                     required: true,
-                                    validate: (value: number) => value >= 16 && value <= 120,
+                                    validate: (value: number) => value >= 18,
                                 }}
                                 icon={
                                     <Baby size={20} className="absolute left-3 top-12 text-gray-500" />
@@ -137,11 +134,11 @@ export default function Register() {
                             />
 
                             {errors.age?.type === "required" && (
-                                <p className="text-red-500 text-sm">Idade é obrigatória.</p>
+                                <p className="text-destructive text-sm">Idade é obrigatória.</p>
                             )}
                             {errors.age?.type === "validate" && (
-                                <p className="text-red-500 text-sm">
-                                    Idade deve ser entre 16 e 120 anos.
+                                <p className="text-destructive text-sm">
+                                  A idade mínima é de 18 anos.
                                 </p>
                             )}
                         </fieldset>
@@ -166,10 +163,10 @@ export default function Register() {
                             />
 
                             {errors.email?.type === "required" && (
-                                <p className="text-red-500 text-sm">Email é obrigatório.</p>
+                                <p className="text-destructive text-sm">Email é obrigatório.</p>
                             )}
                             {errors.email?.type === "pattern" && (
-                                <p className="text-red-500 text-sm">
+                                <p className="text-destructive text-sm">
                                     Email deve ser válido.
                                 </p>
                             )}
@@ -193,10 +190,10 @@ export default function Register() {
                             />
 
                             {errors.password?.type === "required" && (
-                                <p className="text-red-500 text-sm">Senha é obrigatória.</p>
+                                <p className="text-destructive text-sm">Senha é obrigatória.</p>
                             )}
                             {errors.password?.type === "minLength" && (
-                                <p className="text-red-500 text-sm">Mínimo de 8 caracteres.</p>
+                                <p className="text-destructive text-sm">Mínimo de 8 caracteres.</p>
                             )}
                         </fieldset>
 

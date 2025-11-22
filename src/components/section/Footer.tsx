@@ -27,13 +27,13 @@ const Footer: React.FC = () => {
           <div>
             <Text size="md" colors="primary" className="mb-4 font-semibold">Links Úteis</Text>
             <ul className="space-y-2">
-              <LiFooter onClick={() => navigate("/")}>
+              <LiFooter onClick={() => navigate("/home")}>
                Home
               </LiFooter>
-              <LiFooter onClick={() => navigate("/consulta")}>
+              <LiFooter onClick={() => navigate("/sobre")}>
                 Sobre
               </LiFooter>
-              <LiFooter onClick={() => navigate("/duvida")}>
+              <LiFooter onClick={() => navigate("/faq")}>
                FAQ
               </LiFooter>
             </ul>

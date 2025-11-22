@@ -2,6 +2,7 @@ import Title from "@/components/ui/textos/Title";
 import Subtitle from "@/components/ui/textos/Subtitle";
 import { Text } from "@/components/ui/textos/Text";
 import { CheckCircle2, Target, Users, Sparkles } from "lucide-react";
+import Developers from "@/components/section/Developers";
 
 export default function About() {
   return (
@@ -47,7 +48,7 @@ export default function About() {
 
       {/* Solução */}
       <section className="max-w-5xl mx-auto mb-20">
-        <Subtitle>Nossa Solução</Subtitle>
+        <Subtitle position="center">Nossa Solução</Subtitle>
 
         <Text colors="mutedForeground" className="mt-8">
           O Skills Match é uma plataforma digital de autodescoberta profissional
@@ -149,6 +150,9 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      <Developers />
+
     </div>
   );
 }

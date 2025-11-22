@@ -1,4 +1,4 @@
-interface INameValues {
+export interface INameValues {
     id?: string,
     name: string,
     email: string,
@@ -6,4 +6,10 @@ interface INameValues {
     password: string,
 }
 
-export default INameValues;
+export interface INameValuesAllString {
+    id?: string,
+    name: string,
+    email: string,
+    age: string,
+    password: string,
+}
