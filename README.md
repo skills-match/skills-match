@@ -116,12 +116,18 @@ src/
 
 ## Imagens
 
-...
+![Screenshot 2025-11-22 012351](https://github.com/user-attachments/assets/173d133f-f3f1-425d-b11b-e0f189dd82a7)
+![Screenshot 2025-11-22 012413](https://github.com/user-attachments/assets/c87ca877-5607-4edc-afcd-aface6967673)
+![Screenshot 2025-11-22 012441](https://github.com/user-attachments/assets/0d2138fd-720b-421c-80c4-1de879dc352f)
+![Screenshot 2025-11-22 012659](https://github.com/user-attachments/assets/5a29f2f4-8a53-4d0f-a395-b7a4f5d2955a)
+![Screenshot 2025-11-22 012639](https://github.com/user-attachments/assets/7f064983-79f2-4623-b1e1-d99e195163cd)
 
-## 🧑‍💻 Contribuidores
+Link Repositório: https://github.com/skills-match/skills-match/
 
-O projeto Skills Match foi desenvolvido por:
+## 👨‍💻 Equipe
 
-*   Iago Liziero
-*   Enrico
-*   Vitor
+| Nome Completo           | RM     | Turma |
+| ----------------------- | ------ | ----- |
+| Iago Liziero            | RM564063 | 1TDSPG |
+| Enrico Delesporte          | RM565760 | 1TDSPG |
+| Vitor Souza             | RM565422 | 1TDSPG |
