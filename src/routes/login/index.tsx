@@ -32,7 +32,6 @@ const Login = () => {
 
       if (verify !== false) {
         login();
-        setIsLoading(!isLoading);
         navigate("/home");
       } else {
         logout();
@@ -168,7 +167,7 @@ const Login = () => {
               </p>
             )}
 
-            <Button type="submit" size="lg" className="w-full text-white flex gap-2 items-center justify-center">
+            <Button onClick={() => setIsLoading(true)} type="submit" size="lg" className="w-full text-white flex gap-2 items-center justify-center">
               {!isLoading ? "Entrar" : "Entrando..."} <Forward />
             </Button>
 

@@ -1,25 +1,23 @@
-import { StepsArray } from "@/interfaces/ISteps-form";
+import { ICarrer } from "@/interfaces/ICareer";
 
 const BASE_URL: string = `${import.meta.env.VITE_API_URL_FORM}`;
 
-export const createDataForm = async (data: StepsArray) => {
-
+export const createDataForm = async (data: ICarrer) => {
     try {
-        const response = await fetch(BASE_URL, {
+        const response = await fetch(`${BASE_URL}/recommend`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
         });
 
-        if (response.status != 201) {
-            console.error('Failed to create post:', response.statusText);
-        } else {
-            const data = await response.json();
-            return data;
+        if (!response.ok) {
+            console.error("Failed:", response.status, response.statusText);
+            return null;
         }
+
+        return await response.json();
+
     } catch (error) {
         console.log(`Error create User: ${error}`);
     }
-}
+};

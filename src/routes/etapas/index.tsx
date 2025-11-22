@@ -3,10 +3,10 @@ import InputSteps from "@/components/ui/input/Input-steps";
 import { Text } from "@/components/ui/textos/Text";
 import { steps } from "@/data/steps-form";
 import { ICarrer, IFieldFormsData } from "@/interfaces/ICareer";
-import { set } from "date-fns";
+import { ICareerResult } from "@/interfaces/ICareer-result";
+import { createDataForm } from "@/services/steps-service";
 import { Forward } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 const Steps = () => {
@@ -16,11 +16,7 @@ const Steps = () => {
     thirdStep: false,
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFieldFormsData | ICarrer>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<IFieldFormsData & ICarrer>({
     finishedSchool: "",
@@ -49,63 +45,82 @@ const Steps = () => {
 
   const handleNext = async () => {
     if (index === 0) {
-      if (
-        formData.finishedSchool == "" ||
-        formData.professionalExperience == ""
-      ) {
+      if (formData.finishedSchool === "" || formData.professionalExperience === "") {
         setMessageError({ ...messageError, firstStep: true });
         return;
       }
-
+  
       setMessageError({ ...messageError, firstStep: false });
-
+  
       setFormData((prev) => ({
         ...prev,
         education: [prev.finishedSchool, prev.professionalExperience],
       }));
     }
-
+  
     if (index === 1) {
-      if (formData.softSkills == "" || formData.hardSkills == "") {
+      if (formData.softSkills === "" || formData.hardSkills === "") {
         setMessageError({ ...messageError, secondStep: true });
         return;
       }
-
+  
       setMessageError({ ...messageError, secondStep: false });
-
+  
       setFormData((prev) => ({
         ...prev,
         skills: [prev.softSkills, prev.hardSkills],
       }));
     }
-
+  
     if (index === 2) {
       if (formData.professionalScore < 0 || formData.professionalScore > 10) {
         setMessageError({ ...messageError, thirdStep: true });
         return;
       }
-
+    
       setMessageError({ ...messageError, thirdStep: false });
-
+    
       const finalData = {
-        ...formData,
-        experience: [formData.professionalScore],
+        education: [
+          formData.finishedSchool,
+          formData.professionalExperience
+        ],
+        skills: [
+          formData.softSkills,
+          formData.hardSkills
+        ],
+        experience: [
+          String(formData.professionalScore)
+        ]
       };
+      
+      try {
+        if (finalData) {
+         const result = await createDataForm(finalData);
+          navigate("/home");
 
-      const BASE_URL = import.meta.env.VITE_API_URL_FORM;
+          const returnData: ICareerResult = {
+            best_career: result.career_analysis.best_career,
+            required_skills: result.career_analysis.required_skills,
+            recommendations: result.recommendations,
+            user_skills: result.user_skills,
+          }
 
-      await fetch("http://localhost:3000/steps", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(finalData),
-      });
+          localStorage.setItem("careerResult", JSON.stringify(returnData));
 
-      navigate("/home");
-      return;
+        } else {
+          alert("Erro ao criar, tente novamente.");
+        }
+       
+      } catch (error) {
+        throw new Error(`Error create data steps: ${error}`);
+      }
     }
-
+    
     setIndex(index + 1);
   };
+
+
 
   return (
     <div className="flex justify-center mt-10 mb-10">
@@ -159,8 +174,11 @@ const Steps = () => {
 
         <div className="flex gap-4">
           {index == 2 ? (
-            <Button onClick={handleNext} className="flex gap-2">
-              Finalizar
+            <Button onClick={() => {
+              handleNext();
+              setIsLoading(true);
+            }} className="flex gap-2">
+              {isLoading == true ? "Finalizando..." : "Finalizar"}
             </Button>
           ) : (
             <Button onClick={handleNext} className="flex gap-2">
